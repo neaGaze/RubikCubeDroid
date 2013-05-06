@@ -10,10 +10,13 @@ import android.util.Log;
 
 public class RubikCube extends GLSurfaceView implements GLSurfaceView.Renderer{
 
-	private CubeBuild cube;
+	private CubeBuild[] cube = new CubeBuild[27];
 	public RubikCube(Context context) {
 		super(context);
-		cube = new CubeBuild();
+		for(int i =0; i<27; i++)
+		{
+			cube[i] = new CubeBuild();
+		}
 		// TODO Auto-generated constructor stub
 	}
 
@@ -23,10 +26,30 @@ public class RubikCube extends GLSurfaceView implements GLSurfaceView.Renderer{
 		// Log.v("ERROR ON RUBIKCUBE","Cube.draw()");
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 		gl.glLoadIdentity();
-		gl.glTranslatef(0.0f, 0.0f, -7.0f);
 		gl.glScalef(0.8f, 0.8f, 0.8f);  
-		gl.glRotatef(50.0f, 20.0f, 30.0f, 40.0f);
-		cube.draw(gl);
+		
+		gl.glLoadIdentity();
+		gl.glTranslatef(0.0f, 0.0f, -7.0f);
+		gl.glRotatef(30.0f, 30.0f, 30.0f, 30.0f);
+	//	gl.glRotatef(210.0f, 210.0f, 210.0f, 150.0f);
+		cube[0].draw(gl);
+	/*	
+		int k=0;
+
+		for(int l=0; l<3; l++)
+		{
+			for(int i=0; i<3; i++)
+			{
+				for(int j=0; j<3; j++)
+				{
+					gl.glLoadIdentity();
+					gl.glTranslatef(-2.1f+(2.1f*i), -2.1f+(2.1f*j), -23.1f+(2.1f*l));
+	//				gl.glRotatef(50.0f, 20.0f, 30.0f, 40.0f);
+					gl.glRotatef(200.0f, 200.0f, 30.0f, 40.0f);
+					cube[k++].draw(gl);
+				}
+			}
+		}   */
 	}
 
 	@Override

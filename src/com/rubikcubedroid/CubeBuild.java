@@ -28,26 +28,36 @@ public class CubeBuild {
 	};
 	
 	private byte indices[] = {
-			0, 4, 5,    0, 5, 1,
-            1, 5, 6,    1, 6, 2,
-            2, 6, 7,    2, 7, 3,
-            3, 7, 4,    3, 4, 0,
-            4, 7, 6,    4, 6, 5,
-            3, 0, 1,    3, 1, 2    
+			0, 4, 5,    0, 1, 5,
+            1, 5, 6,    1, 2, 6,
+            2, 6, 7,    2, 3, 7,
+            3, 7, 4,    3, 0, 4,
+            4, 7, 6,    4, 5, 6,
+            3, 0, 1,    3, 2, 1    
 	};
 	
 	
 	 /** The initial color definition */	
 		private float colors[] = {
-				            0.0f,  1.0f,  0.0f,  1.0f,  //Position 0 : compatible with Position 4 
-				            0.0f,  0.0f,  1.0f,  1.0f,	
-				            0.0f,  0.0f,  1.0f,  1.0f,
+				 /*           0.0f,  1.0f,  0.0f,  1.0f,  //Position 0 : compatible with Position 4 
+				            0.0f,  0.0f,  1.0f,  1.0f,	//Position 1 : compatible with Position 2
+				            0.0f,  0.0f,  1.0f,  1.0f,  //Position 2 : compatible with Position 1
 				            1.0f,  0.0f,  0.0f,  1.0f,  //Position 3 : compatible with Position 7 
 				            0.0f,  1.0f,  0.0f,  1.0f,	//Position 4 : compatible with Position 0
-				            1.0f,  1.0f,  0.0f,  1.0f,
-				            1.0f,  1.0f,  0.0f,  1.0f,
+				            1.0f,  0.0f,  1.0f,  1.0f,
+				            1.0f,  1.0f,  1.0f,  1.0f,
 				            1.0f,  0.0f,  0.0f,  1.0f	//Position 7 : compatible with Position 3 
-				    								};
+				    	*/	 
+				
+						1.0f,  1.0f,  1.0f,  1.0f,  
+			            0.0f,  1.0f,  0.0f,  1.0f,	
+			            0.0f,  0.0f,  0.0f,  1.0f,  
+			            0.0f,  1.0f,  1.0f,  1.0f,   
+			            1.0f,  1.0f,  0.0f,  1.0f,	
+			            1.0f,  0.0f,  1.0f,  1.0f,
+			            1.0f,  0.0f,  0.0f,  1.0f,
+			            0.0f,  0.0f,  1.0f,  1.0f	 
+				};
 	   
 	public CubeBuild()
 			{

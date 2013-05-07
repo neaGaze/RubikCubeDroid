@@ -8,19 +8,29 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 public class RubikCube extends GLSurfaceView implements GLSurfaceView.Renderer{
 
 	private CubeBuild[] cube = new CubeBuild[27];
-	float rot = 0.0f, cubeRot = 0.0f;
+	private float rot = 0.0f, cubeRotX= 0.0f, cubeRotY = 0.0f;
+	private float xRot =  0.0f, yRot = 0.0f;
+	private float oldX, oldY;
+	private static final float TOUCH_SCALE = 0.2f;
+	
 	public RubikCube(Context context) {
 		super(context);
+
+		//Request focus, otherwise buttons won't react
+		this.requestFocus();
+		this.setFocusableInTouchMode(true);
 		for(int i =0; i<27; i++)
 		{
 			cube[i] = new CubeBuild();
 		}
 		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
@@ -29,10 +39,10 @@ public class RubikCube extends GLSurfaceView implements GLSurfaceView.Renderer{
 		// Log.v("ERROR ON RUBIKCUBE","Cube.draw()");
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 		gl.glLoadIdentity();
-		gl.glScalef(0.8f, 0.8f, 0.8f);  
+		gl.glScalef(0.4f, 0.4f, 0.4f);  
 	/*	
 	 * 
-	 * This is jsut to work with the Colors
+	 * This is just to work with the Colors
 	 * 
 		gl.glLoadIdentity();
 		gl.glTranslatef(0.0f, 0.0f, -7.0f);
@@ -43,13 +53,17 @@ public class RubikCube extends GLSurfaceView implements GLSurfaceView.Renderer{
 		int k=0;
 
 		gl.glPushMatrix();
-		gl.glRotatef(cubeRot, 0.0f, 0.0f ,1.0f);
+		gl.glTranslatef(0.0f, 0.0f, -21.0f);
+		gl.glRotatef(cubeRotX, 1.0f, 0.0f , 0.0f);
+		gl.glRotatef(cubeRotY, 0.0f, 1.0f , 0.0f);
+		gl.glTranslatef(0.0f, 0.0f, 21.0f);
+		
 		for(int l=0; l<3; l++)
 		{
 			if(l == 2)  //To rotate only the first front polygon in 1.7f angle
 			{
-			gl.glPushMatrix();
-			gl.glRotatef(rot, 0.0f, 0.0f, 1.0f);
+				gl.glPushMatrix();
+				gl.glRotatef(rot, 0.0f, 0.0f, 1.0f);
 			}
 			for(int i=0; i<3; i++)
 			{				
@@ -64,11 +78,17 @@ public class RubikCube extends GLSurfaceView implements GLSurfaceView.Renderer{
 			}
 			if(l ==2)
 			{
-			gl.glPopMatrix();
-			rot += 1.7f;  }
+				gl.glPopMatrix();
+				if(rot >= 90.0f)
+					rot = 90.0f;
+				else
+					rot += 4.0f;  
+			}
 		}
+		
+		cubeRotX -= 5.0f;
+		cubeRotY -= 0.0f;
 		gl.glPopMatrix();
-		cubeRot -= 0.5f;
 	}
 
 	@Override
@@ -99,4 +119,25 @@ public class RubikCube extends GLSurfaceView implements GLSurfaceView.Renderer{
 	 * @param args
 	 */
 	
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		float x = event.getX();
+		float y = event.getY();
+		
+		if(event.getAction() == MotionEvent.ACTION_MOVE)
+		{
+			//For moving the cube portion according to the touch action
+			float dx = x - oldX;
+			float dy = y - oldY;
+			
+			cubeRotX += dy * TOUCH_SCALE;
+			cubeRotY += dx * TOUCH_SCALE;
+		}
+		else if(event.getAction() == MotionEvent.ACTION_UP)
+		{
+			//need to do this for detection of cube pressed
+		}
+		return true;
+	}
 }

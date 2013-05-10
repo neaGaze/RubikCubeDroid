@@ -9,7 +9,11 @@ import javax.microedition.khronos.opengles.GL10;
 import android.util.Log;
 
 public class CubeBuild {
-	
+/*
+ * @author : neaGaze (Nigesh)
+ * 
+ * This is for the contruction of the basic cube of the rubik cube
+ * */
 	private ByteBuffer byteBuffer;
 	private FloatBuffer vertexBuffer;
 	private FloatBuffer colorBuffer;

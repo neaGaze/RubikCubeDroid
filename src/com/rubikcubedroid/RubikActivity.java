@@ -1,10 +1,12 @@
 package com.rubikcubedroid;
 
+import com.rubikcubedroid.CubeBuild;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -57,5 +59,5 @@ public class RubikActivity extends Activity implements OnClickListener{
 				Toast.makeText(this, "Doesn't work", Toast.LENGTH_SHORT).show();
 			}
 	}
-
+	
 }
